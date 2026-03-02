@@ -1,0 +1,17 @@
+{
+  "name": "Liegestütze Challenge 2026",
+  "short_name": "Pushup 2026",
+  "description": "Dein persönlicher Liegestütze Challenge Tracker",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#1a1a2e",
+  "icons": [
+    {
+      "src": "jahres-tracker.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
