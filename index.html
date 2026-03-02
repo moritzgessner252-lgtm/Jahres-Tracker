@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liegestütze Challenge 2026 💪</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #0f0f0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', 'Impact', sans-serif;
+            position: relative;
+            overflow-x: hidden;
+            padding: 2rem;
+        }
+
+        .background-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .glow-orb-1 {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,69,0,0.2) 0%, transparent 70%);
+            filter: blur(60px);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,140,0,0.2) 0%, transparent 70%);
+            filter: blur(60px);
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,69,0,0.5), 0 0 40px rgba(255,69,0,0.3); }
+            50% { box-shadow: 0 0 30px rgba(255,69,0,0.8), 0 0 60px rgba(255,69,0,0.5); }
+        }
+
+        @keyframes motivationPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: slideUp 0.6s ease-out;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .challenge-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(255,69,0,0.2), rgba(255,140,0,0.2));
+            border: 2px solid rgba(255,69,0,0.5);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: #ff8c00;
+            text-transform: uppercase;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255,69,0,0.5);
+        }
+
+        .month-display {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2rem;
+            font-family: 'Roboto Condensed', sans-serif;
+            letter-spacing: 3px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .side-panel {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .panel-title {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .goal-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff8c00;
+            text-shadow: 0 0 20px rgba(255,140,0,0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-label {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .month-progress {
+            margin-top: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .progress-bar-container {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4500, #ff8c00);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(255,69,0,0.8);
+        }
+
+        .counter-display {
+            position: relative;
+        }
+
+        #count {
+            font-size: 8rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            text-shadow: 0 0 40px rgba(255,69,0,0.8), 0 0 80px rgba(255,69,0,0.4);
+            background: linear-gradient(180deg, #fff 0%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        #count.pulse {
+            transform: scale(1.1);
+        }
+
+        .daily-progress {
+            height: 6px;
+            width: 100%;
+            max-width: 300px;
+            margin: 1.5rem auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .daily-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00ff88, #00cc88);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(0,255,136,0.8);
+        }
+
+        .status-message {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-top: 1rem;
+            font-family: 'Roboto Condensed', sans-serif;
+            min-height: 1.5rem;
+        }
+
+        .status-message.complete {
+            color: #00ff88;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0,255,136,0.5);
+        }
+
+        .motivation-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff4500;
+            text-shadow: 0 0 20px rgba(255,69,0,0.8);
+            white-space: nowrap;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .motivation-message.show {
+            animation: motivationPulse 0.5s ease-in-out;
+            opacity: 1;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        button:active {
+            transform: scale(0.95) !important;
+        }
+
+        .btn-minus, .btn-reset {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255,69,0,0.1);
+            color: #ff4500;
+            font-size: 2rem;
+            font-weight: 700;
+            border: 3px solid rgba(255,69,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-minus:hover, .btn-reset:hover {
+            background: rgba(255,69,0,0.3);
+            border-color: #ff4500;
+        }
+
+        .btn-reset {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 1.3rem;
+            border: 3px solid rgba(255,255,255,0.2);
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .btn-reset:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .btn-plus {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+            color: #fff;
+            font-size: 4rem;
+            font-weight: 700;
+            box-shadow: 0 10px 40px rgba(255,69,0,0.4), 0 0 20px rgba(255,69,0,0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .btn-plus:hover {
+            transform: scale(1.05);
+        }
+
+        .year-timeline {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-title {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 1rem;
+        }
+
+        .timeline-month {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-month.current {
+            background: rgba(255,69,0,0.2);
+            border-color: #ff4500;
+            box-shadow: 0 0 20px rgba(255,69,0,0.3);
+        }
+
+        .timeline-month.completed {
+            background: rgba(0,255,136,0.1);
+            border-color: rgba(0,255,136,0.3);
+        }
+
+        .month-name {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .month-goal {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .timeline-month.current .month-goal {
+            color: #ff8c00;
+        }
+
+        .timeline-month.completed .month-goal {
+            color: #00ff88;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff4500;
+            animation: confetti 3s ease-out forwards;
+            pointer-events: none;
+        }
+
+        .streak-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,200,136,0.2));
+            border: 2px solid rgba(0,255,136,0.4);
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: #00ff88;
+        }
+
+        .footer-text {
+            margin-top: 2rem;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <div class="glow-orb-1"></div>
+    <div class="glow-orb-2"></div>
+
+    <div class="container">
+        <div class="challenge-badge">Challenge 2026</div>
+        <h1>Liegestütze</h1>
+        <div class="month-display" id="monthDisplay">MÄRZ 2026</div>
+
+        <div class="main-content">
+            <!-- Left Panel: Monthly Goal -->
+            <div class="side-panel">
+                <div class="panel-title">Monatsziel</div>
+                <div class="goal-number" id="monthlyGoal">20</div>
+                <div class="goal-label">pro Tag</div>
+                
+                <div class="month-progress">
+                    <div class="progress-label">
+                        <span>März Fortschritt</span>
+                        <span id="monthProgressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="monthProgressBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center: Counter -->
+            <div class="counter-display">
+                <div id="count">0</div>
+                
+                <div class="daily-progress">
+                    <div class="daily-progress-bar" id="dailyProgressBar"></div>
+                </div>
+
+                <div class="status-message" id="statusMessage">Starte dein Training!</div>
+
+                <div class="motivation-message" id="motivationMessage"></div>
+
+                <div class="buttons">
+                    <button class="btn-minus" onclick="decrement()">−</button>
+                    <button class="btn-plus" onclick="increment()">+</button>
+                    <button class="btn-reset" onclick="resetDaily()">↺</button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Stats -->
+            <div class="side-panel">
+                <div class="panel-title">Gesamt 2026</div>
+                <div class="goal-number" id="totalCount" style="background: linear-gradient(180deg, #fff 0%, #00ff88 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 20px rgba(0,255,136,0.5);">0</div>
+                <div class="goal-label">Liegestütze insgesamt</div>
+                
+                <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <div class="panel-title" style="margin-bottom: 0.5rem;">Nächster Monat</div>
+                    <div style="font-size: 1.8rem; font-weight: 700; color: #ff8c00; margin-bottom: 0.3rem;">25</div>
+                    <div class="goal-label">April 2026</div>
+                </div>
+                
+                <div class="streak-badge" id="streakBadge">
+                    🔥 <span id="streakCount">0</span> Tage Streak
+                </div>
+            </div>
+        </div>
+
+        <!-- Year Timeline -->
+        <div class="year-timeline">
+            <div class="timeline-title">Deine 2026 Challenge Timeline</div>
+            <div class="timeline-grid" id="timelineGrid"></div>
+        </div>
+
+        <div class="footer-text">+5 Liegestütze jeden Monat 💪</div>
+    </div>
+
+    <script>
+        // Challenge Configuration
+        const CHALLENGE_START_MONTH = 0; // Januar = 0
+        const STARTING_GOAL = 10;
+        const MONTHLY_INCREMENT = 5;
+        
+        // Get current month (0-11)
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+        
+        // Calculate current monthly goal
+        const monthsSinceStart = currentMonth - CHALLENGE_START_MONTH;
+        const currentMonthlyGoal = STARTING_GOAL + (monthsSinceStart * MONTHLY_INCREMENT);
+        
+        // Load data from localStorage
+        let todayCount = parseInt(localStorage.getItem('todayCount') || '0');
+        let totalCount = parseInt(localStorage.getItem('totalCount') || '0');
+        let lastDate = localStorage.getItem('lastDate');
+        let completedDays = JSON.parse(localStorage.getItem('completedDays') || '[]');
+        let monthCompletedDays = parseInt(localStorage.getItem('monthCompletedDays') || '0');
+        
+        // Check if it's a new day
+        const today = new Date().toDateString();
+        if (lastDate !== today) {
+            // Check if yesterday's goal was completed
+            if (todayCount >= currentMonthlyGoal) {
+                completedDays.push(lastDate);
+                monthCompletedDays++;
+                localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                localStorage.setItem('monthCompletedDays', monthCompletedDays.toString());
+            }
+            todayCount = 0;
+            localStorage.setItem('lastDate', today);
+        }
+        
+        const monthNames = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 
+                           'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+        
+        // Elements
+        const countElement = document.getElementById('count');
+        const totalCountElement = document.getElementById('totalCount');
+        const dailyProgressBar = document.getElementById('dailyProgressBar');
+        const statusMessage = document.getElementById('statusMessage');
+        const motivationElement = document.getElementById('motivationMessage');
+        const monthDisplay = document.getElementById('monthDisplay');
+        const monthlyGoalElement = document.getElementById('monthlyGoal');
+        const monthProgressBar = document.getElementById('monthProgressBar');
+        const monthProgressPercent = document.getElementById('monthProgressPercent');
+        const streakCount = document.getElementById('streakCount');
+        
+        // Initialize display
+        monthDisplay.textContent = `${monthNames[currentMonth].toUpperCase()} ${currentYear}`;
+        monthlyGoalElement.textContent = currentMonthlyGoal;
+        countElement.textContent = todayCount;
+        
+        function updateDisplay() {
+            countElement.textContent = todayCount;
+            totalCountElement.textContent = totalCount.toLocaleString('de-DE');
+            
+            // Update daily progress
+            const dailyProgress = Math.min((todayCount / currentMonthlyGoal) * 100, 100);
+            dailyProgressBar.style.width = dailyProgress + '%';
+            
+            // Update status message
+            if (todayCount >= currentMonthlyGoal) {
+                statusMessage.textContent = '✅ Tagesziel erreicht! Legendär!';
+                statusMessage.classList.add('complete');
+            } else {
+                const remaining = currentMonthlyGoal - todayCount;
+                statusMessage.textContent = `Noch ${remaining} bis zum Tagesziel`;
+                statusMessage.classList.remove('complete');
+            }
+            
+            // Update month progress
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const currentDay = currentDate.getDate();
+            const expectedCompletedDays = currentDay - 1; // Days that have passed
+            const monthProgress = Math.min((monthCompletedDays / daysInMonth) * 100, 100);
+            monthProgressBar.style.width = monthProgress + '%';
+            monthProgressPercent.textContent = `${monthCompletedDays}/${daysInMonth} Tage`;
+            
+            // Update streak
+            streakCount.textContent = calculateStreak();
+            
+            // Save to localStorage
+            localStorage.setItem('todayCount', todayCount.toString());
+            localStorage.setItem('totalCount', totalCount.toString());
+        }
+        
+        function calculateStreak() {
+            if (completedDays.length === 0) return 0;
+            
+            let streak = 0;
+            let checkDate = new Date();
+            checkDate.setDate(checkDate.getDate() - 1); // Start from yesterday
+            
+            for (let i = 0; i < 365; i++) {
+                const dateStr = checkDate.toDateString();
+                if (completedDays.includes(dateStr)) {
+                    streak++;
+                    checkDate.setDate(checkDate.getDate() - 1);
+                } else {
+                    break;
+                }
+            }
+            
+            // Check if today's goal is complete
+            if (todayCount >= currentMonthlyGoal) {
+                streak++;
+            }
+            
+            return streak;
+        }
+        
+        function showMotivation(message) {
+            motivationElement.textContent = message;
+            motivationElement.classList.add('show');
+            
+            setTimeout(() => {
+                motivationElement.classList.remove('show');
+            }, 2000);
+        }
+        
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * window.innerWidth + 'px';
+                    confetti.style.background = ['#ff4500', '#ff8c00', '#00ff88', '#fff'][Math.floor(Math.random() * 4)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+        
+        function increment() {
+            todayCount++;
+            totalCount++;
+            updateDisplay();
+            
+            // Pulse effect
+            countElement.classList.add('pulse');
+            setTimeout(() => {
+                countElement.classList.remove('pulse');
+            }, 300);
+            
+            // Check if goal reached
+            if (todayCount === currentMonthlyGoal) {
+                showMotivation('🎉 TAGESZIEL ERREICHT! 🎉');
+                createConfetti();
+            } else if (todayCount === Math.floor(currentMonthlyGoal / 2)) {
+                showMotivation('💪 Halbzeit! Weiter so!');
+            } else if (todayCount === currentMonthlyGoal - 5) {
+                showMotivation('🔥 Nur noch 5!');
+            }
+            
+            // Milestone celebrations for total count
+            if (totalCount === 100) {
+                showMotivation('💯 100 GESAMT! BEAST MODE!');
+                createConfetti();
+            } else if (totalCount === 500) {
+                showMotivation('🚀 500 GESAMT! UNSTOPPABLE!');
+                createConfetti();
+            } else if (totalCount === 1000) {
+                showMotivation('👑 1000 GESAMT! LEGENDE!');
+                createConfetti();
+            }
+        }
+        
+        function decrement() {
+            if (todayCount > 0) {
+                todayCount--;
+                if (totalCount > 0) totalCount--;
+                updateDisplay();
+            }
+        }
+        
+        function resetDaily() {
+            todayCount = 0;
+            updateDisplay();
+            showMotivation('Neuer Versuch! Du schaffst das! 💪');
+        }
+        
+        // Build year timeline
+        function buildTimeline() {
+            const grid = document.getElementById('timelineGrid');
+            
+            for (let i = 0; i < 12; i++) {
+                const goal = STARTING_GOAL + (i * MONTHLY_INCREMENT);
+                const monthDiv = document.createElement('div');
+                monthDiv.className = 'timeline-month';
+                
+                if (i === currentMonth) {
+                    monthDiv.classList.add('current');
+                } else if (i < currentMonth) {
+                    monthDiv.classList.add('completed');
+                }
+                
+                monthDiv.innerHTML = `
+                    <div class="month-name">${monthNames[i]}</div>
+                    <div class="month-goal">${goal}</div>
+                `;
+                
+                grid.appendChild(monthDiv);
+            }
+        }
+        
+        // Initialize
+        buildTimeline();
+        updateDisplay();
+    </script>
+</body>
+</html>
